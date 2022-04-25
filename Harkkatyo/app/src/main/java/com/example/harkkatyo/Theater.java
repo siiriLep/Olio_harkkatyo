@@ -49,8 +49,7 @@ public class Theater {
                 if(node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
 
-                    Movie movie = new Movie(Integer.parseInt(element.getElementsByTagName("ID").item(0).getTextContent()),
-                            element.getElementsByTagName("Title").item(0).getTextContent());
+                    Movie movie = new Movie(element);
                             // MORE INFORMATION TO BE ADDED ONCE WE DECIDE SOMETHING
                 }
             }
@@ -62,7 +61,7 @@ public class Theater {
     public ArrayList<String> getMovieNames() {
         ArrayList<String> movieNames = new ArrayList<>();
         for (Movie movie : movies) {
-            movieNames.add(movie.getName());
+            movieNames.add(movie.getTitle());
         }
         return movieNames;
     }

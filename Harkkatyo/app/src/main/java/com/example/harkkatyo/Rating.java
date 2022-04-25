@@ -10,4 +10,12 @@ package com.example.harkkatyo;
  */
 
 public class Rating {
+    private String movieName;
+
+    Rating(String movieName){
+        this.movieName = movieName;
+    }
+
+
+
 }

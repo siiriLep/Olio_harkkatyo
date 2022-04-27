@@ -28,9 +28,9 @@ public class Theater {
     ArrayList<Movie> movies;
 
 
-    Theater(int id, String name){
-        this.id = id;
-        this.name = name;
+    Theater(Element theaterInfo){
+        this.id = Integer.parseInt(element.getElementsByTagName("ID").item(0).getTextContent());
+        this.name = element.getElementsByTagName("Name").item(0).getTextContent();
     }
 
     // Gets all the movies shown in the theater
@@ -50,7 +50,6 @@ public class Theater {
                     Element element = (Element) node;
 
                     Movie movie = new Movie(element);
-                            // MORE INFORMATION TO BE ADDED ONCE WE DECIDE SOMETHING
                 }
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {

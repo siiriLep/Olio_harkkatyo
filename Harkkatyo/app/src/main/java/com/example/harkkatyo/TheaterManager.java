@@ -57,8 +57,7 @@ public class TheaterManager {
                     Element element = (Element) node;
 
                     // creating the actual object
-                    Theater theater = new Theater(Integer.parseInt(element.getElementsByTagName("ID").item(0).getTextContent()),
-                            element.getElementsByTagName("Name").item(0).getTextContent());
+                    Theater theater = new Theater(element);
 
                     // adding object to list of theaters
                     theaters.add(theater);

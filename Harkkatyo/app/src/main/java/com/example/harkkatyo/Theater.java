@@ -29,8 +29,8 @@ public class Theater {
 
 
     Theater(Element theaterInfo){
-        this.id = Integer.parseInt(element.getElementsByTagName("ID").item(0).getTextContent());
-        this.name = element.getElementsByTagName("Name").item(0).getTextContent();
+        this.id = Integer.parseInt(theaterInfo.getElementsByTagName("ID").item(0).getTextContent());
+        this.name = theaterInfo.getElementsByTagName("Name").item(0).getTextContent();
     }
 
     // Gets all the movies shown in the theater

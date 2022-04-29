@@ -7,6 +7,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -22,7 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
    * Search movies
 
 */
-public class TheaterManager {
+public class TheaterManager  {
 
     //General variables for this class
     private static TheaterManager tm;

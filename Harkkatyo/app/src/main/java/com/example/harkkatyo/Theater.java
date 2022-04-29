@@ -8,6 +8,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -22,7 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
     *
 
 */
-public class Theater {
+public class Theater implements Serializable {
     private int id;
     private String name;
     ArrayList<Movie> movies;

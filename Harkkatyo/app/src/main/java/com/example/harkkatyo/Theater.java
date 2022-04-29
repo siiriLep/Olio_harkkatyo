@@ -1,6 +1,11 @@
 package com.example.harkkatyo;
 
 
+import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -8,7 +13,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,21 +30,41 @@ import javax.xml.parsers.ParserConfigurationException;
     *
 
 */
+
 public class Theater implements Serializable {
     private int id;
     private String name;
+
     ArrayList<Movie> movies;
 
-
-    Theater(Element theaterInfo){
+    Theater(@NonNull Element theaterInfo){
         this.id = Integer.parseInt(theaterInfo.getElementsByTagName("ID").item(0).getTextContent());
         this.name = theaterInfo.getElementsByTagName("Name").item(0).getTextContent();
     }
 
+
     // Gets all the movies shown in the theater
-    void fetchMovies(String date){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    // Call this function after the theater has been selected!
+    void fetchMovies(String date, LocalTime filterTimePeriodStart, LocalTime filterTimePeriodEnd){  // Date format DDMMYYYY
+        movies.clear();
         movies = new ArrayList<>();
-        String url = "https://www.finnkino.fi/xml/Schedule/?area=" + id + "&dt=" + date;
+        String url;
+
+        // Null checks
+        if(date != null) {
+            url = "https://www.finnkino.fi/xml/Schedule/?area=" + id + "&dt=" + date;
+        } else {
+            url = "https://www.finnkino.fi/xml/Schedule/?area=" + id;
+        }
+
+        // TODO: check if this null checking is fine
+        if(filterTimePeriodStart == null) {
+            filterTimePeriodStart = LocalTime.MIN;  //???
+        }
+        if(filterTimePeriodEnd == null) {
+            filterTimePeriodEnd = LocalTime.MAX;    //???
+        }
 
         try { // reading the xml
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -50,7 +77,14 @@ public class Theater implements Serializable {
                 if(node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
 
-                    Movie movie = new Movie(element);
+                    // Get the movies starting time to filter out movies that aren't in the specified time range
+                    String movieStartTime = element.getElementsByTagName("dttmShowStart").item(0).getTextContent();
+                    LocalTime movieStartLocalTime = LocalTime.parse(movieStartTime.split("T")[0]);
+
+                    if(movieStartLocalTime.isAfter(filterTimePeriodStart) && movieStartLocalTime.isBefore(filterTimePeriodEnd)){
+                        Movie movie = new Movie(element);
+                        movies.add(movie);
+                    }
                 }
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {

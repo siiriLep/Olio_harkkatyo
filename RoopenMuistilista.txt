@@ -1,0 +1,6 @@
+Päivämäärien käsittelyyn DateTimeFormatter!!
+Also date kirjasto aika hyödyllinen
+
+https://www.w3schools.com/java/java_date.asp
+https://docs.oracle.com/javase/8/docs/api/java/time/LocalTime.html#format-java.time.format.DateTimeFormatter-
+https://docs.oracle.com/javase/8/docs/api/java/util/Date.html

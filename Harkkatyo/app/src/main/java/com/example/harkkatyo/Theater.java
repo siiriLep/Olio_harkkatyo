@@ -13,6 +13,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -28,11 +30,12 @@ import javax.xml.parsers.ParserConfigurationException;
     *
 
 */
-public class Theater {
-    private final int id;
-    private final String name;
-    ArrayList<Movie> movies;
 
+public class Theater implements Serializable {
+    private int id;
+    private String name;
+
+    ArrayList<Movie> movies;
 
     Theater(@NonNull Element theaterInfo){
         this.id = Integer.parseInt(theaterInfo.getElementsByTagName("ID").item(0).getTextContent());

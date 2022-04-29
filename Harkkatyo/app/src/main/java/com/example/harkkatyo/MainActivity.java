@@ -2,8 +2,10 @@ package com.example.harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -13,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     Button button;
     TheaterManager manager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
         manager.fetchTheaters();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, manager.getTheaterNames());
         spinner.setAdapter(adapter);
+
+    }
+
+    public void loadActivity (View v) {
+        Intent intent = new Intent(MainActivity.this, TheaterActivity.class);
+        intent.putExtra("object", manager.getTheater(spinner.getSelectedItemPosition()));
+        startActivity(intent);
+
     }
 
 }

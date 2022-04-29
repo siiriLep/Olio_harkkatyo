@@ -3,6 +3,7 @@ package com.example.harkkatyo;
 
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import org.w3c.dom.Document;
@@ -33,7 +34,7 @@ public class Theater {
     ArrayList<Movie> movies;
 
 
-    Theater(Element theaterInfo){
+    Theater(@NonNull Element theaterInfo){
         this.id = Integer.parseInt(theaterInfo.getElementsByTagName("ID").item(0).getTextContent());
         this.name = theaterInfo.getElementsByTagName("Name").item(0).getTextContent();
     }

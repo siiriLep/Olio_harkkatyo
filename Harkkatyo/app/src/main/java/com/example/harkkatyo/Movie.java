@@ -1,6 +1,8 @@
 package com.example.harkkatyo;
 
 
+import androidx.annotation.NonNull;
+
 import org.w3c.dom.Element;
 
 /*
@@ -13,15 +15,16 @@ import org.w3c.dom.Element;
 public class Movie {
     private int id;
     private String title;
-    private int ageRestriction;
+    private int runtime;
+
 
 
     // Constructor is given the whole element from the xml, and it parses itself
     // This is done this way in order to keep the expanding of this software as easy as possible
-    Movie(Element movieInfo) {
+    Movie(@NonNull Element movieInfo) {
         this.title = movieInfo.getElementsByTagName("Title").item(0).getTextContent();
         this.id = Integer.parseInt(movieInfo.getElementsByTagName("ID").item(0).getTextContent());
-
+        this.runtime = Integer.parseInt(movieInfo.getElementsByTagName("LengthInMinutes").item(0).getTextContent());
     }
 
     public String getTitle() {
@@ -32,7 +35,7 @@ public class Movie {
         return id;
     }
 
-    public int getAgeRestriction() {
-        return ageRestriction;
+    public int getRuntime() {
+        return runtime;
     }
 }

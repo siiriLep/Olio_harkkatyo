@@ -43,6 +43,7 @@ public class Theater {
     @RequiresApi(api = Build.VERSION_CODES.O)
     // Call this function after the theater has been selected!
     void fetchMovies(String date, LocalTime filterTimePeriodStart, LocalTime filterTimePeriodEnd){  // Date format DDMMYYYY
+        movies.clear();
         movies = new ArrayList<>();
         String url;
 

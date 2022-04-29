@@ -47,7 +47,7 @@ public class Theater {
         String url;
 
         // Null checks
-        if(date != null || !date.isEmpty()) {
+        if(date != null) {
             url = "https://www.finnkino.fi/xml/Schedule/?area=" + id + "&dt=" + date;
         } else {
             url = "https://www.finnkino.fi/xml/Schedule/?area=" + id;

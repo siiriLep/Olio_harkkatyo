@@ -78,7 +78,7 @@ public class Theater {
                     String movieStartTime = element.getElementsByTagName("dttmShowStart").item(0).getTextContent();
                     LocalTime movieStartLocalTime = LocalTime.parse(movieStartTime.split("T")[0]);
 
-                    if(movieStartLocalTime.isAfter(filterTimePeriodStart) || movieStartLocalTime.isBefore(filterTimePeriodEnd)){
+                    if(movieStartLocalTime.isAfter(filterTimePeriodStart) && movieStartLocalTime.isBefore(filterTimePeriodEnd)){
                         Movie movie = new Movie(element);
                         movies.add(movie);
                     }

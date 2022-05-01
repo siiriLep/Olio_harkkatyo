@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 
 import org.w3c.dom.Element;
 
+import java.io.Serializable;
+
 /*
     ### Movie ###
     * run time
@@ -12,7 +14,7 @@ import org.w3c.dom.Element;
     * thumbnail image
     * etc. etc.
  */
-public class Movie {
+public class Movie implements Serializable {
     private int id;
     private String title;
     private int runtime;

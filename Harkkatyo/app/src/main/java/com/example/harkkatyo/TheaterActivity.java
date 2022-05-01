@@ -47,7 +47,7 @@ public class TheaterActivity extends AppCompatActivity {
         filterStart = LocalTime.MIN;
         filterEnd = LocalTime.MAX;
 
-        updateMovieList(date);
+        updateMovieList(date, filterStart, filterEnd);
         updateDate(date);
     }
 
@@ -61,17 +61,17 @@ public class TheaterActivity extends AppCompatActivity {
     public void oneDayForward(View v){
         date = date.plusDays(1);
         updateDate(date);
-        updateMovieList(date);
+        updateMovieList(date, filterStart, filterEnd);
     }
 
     public void oneDayBack(View v){
         date = date.minusDays(1);
         updateDate(date);
-        updateMovieList(date);
+        updateMovieList(date, filterStart, filterEnd);
     }
 
-    private void updateMovieList(LocalDate date){
-        theater.fetchMovies(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), null, null);
+    private void updateMovieList(LocalDate date, LocalTime filterTimePeriodStart, LocalTime filterTimePerdiodEnd){
+        theater.fetchMovies(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), filterTimePeriodStart, filterTimePerdiodEnd);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, theater.getMovieNames());
         list.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -84,6 +84,7 @@ public class TheaterActivity extends AppCompatActivity {
                 if(LocalTime.parse(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute)).isBefore(filterEnd)) {
                     filterStart = LocalTime.parse(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute));
                     timePickerStart.setText(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute));
+                    updateMovieList(date, filterStart, filterEnd);
                 }
             }
         };
@@ -99,6 +100,7 @@ public class TheaterActivity extends AppCompatActivity {
                 if(LocalTime.parse(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute)).isAfter(filterStart)) {
                     filterEnd = LocalTime.parse(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute));
                     timePickerEnd.setText(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute));
+                    updateMovieList(date, filterStart, filterEnd);
                 }
             }
         };

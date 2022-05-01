@@ -36,9 +36,7 @@ public class TheaterActivity extends AppCompatActivity {
         currentDateText = findViewById(R.id.textView2);
 
 
-        theater.fetchMovies(date.format(DateTimeFormatter.ofPattern("ddMMyyyy")), null, null);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, theater.getMovieNames());
-        list.setAdapter(adapter);
+        updateMovieList(date);
         updateDate(date);
     }
 
@@ -50,12 +48,21 @@ public class TheaterActivity extends AppCompatActivity {
 
 
     public void oneDayForward(View v){
-        date.plusDays(1);
+        date = date.plusDays(1);
         updateDate(date);
+        updateMovieList(date);
     }
 
     public void oneDayBack(View v){
-        date.minusDays(1);
+        date = date.minusDays(1);
         updateDate(date);
+        updateMovieList(date);
+    }
+
+    private void updateMovieList(LocalDate date){
+        theater.fetchMovies(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), null, null);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, theater.getMovieNames());
+        list.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }

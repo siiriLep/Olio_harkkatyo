@@ -37,7 +37,7 @@ public class Theater implements Serializable {
     private int id;
     private String name;
 
-    ArrayList<Movie> movies;
+    ArrayList<Movie> movies = new ArrayList<>();
 
     Theater(@NonNull Element theaterInfo){
         this.id = Integer.parseInt(theaterInfo.getElementsByTagName("ID").item(0).getTextContent());
@@ -49,7 +49,10 @@ public class Theater implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.O)
     // Call this function after the theater has been selected!
     void fetchMovies(String date, LocalTime filterTimePeriodStart, LocalTime filterTimePeriodEnd){  // Date format DDMMYYYY
-        movies = new ArrayList<>();
+        if(!movies.isEmpty()){
+            movies.clear();
+        }
+
         String url;
 
         // Null checks
@@ -58,6 +61,7 @@ public class Theater implements Serializable {
         } else {
             url = "https://www.finnkino.fi/xml/Schedule/?area=" + id;
         }
+
 
         // TODO: check if this null checking is fine
         if(filterTimePeriodStart == null) {

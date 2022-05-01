@@ -16,7 +16,9 @@ import java.io.IOException;
 
 import java.io.Serializable;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -35,7 +37,7 @@ public class Theater implements Serializable {
     private int id;
     private String name;
 
-    ArrayList<Movie> movies;
+    ArrayList<Movie> movies = new ArrayList<>();
 
     Theater(@NonNull Element theaterInfo){
         this.id = Integer.parseInt(theaterInfo.getElementsByTagName("ID").item(0).getTextContent());
@@ -47,8 +49,10 @@ public class Theater implements Serializable {
     @RequiresApi(api = Build.VERSION_CODES.O)
     // Call this function after the theater has been selected!
     void fetchMovies(String date, LocalTime filterTimePeriodStart, LocalTime filterTimePeriodEnd){  // Date format DDMMYYYY
-        movies.clear();
-        movies = new ArrayList<>();
+        if(!movies.isEmpty()){
+            movies.clear();
+        }
+
         String url;
 
         // Null checks
@@ -58,9 +62,10 @@ public class Theater implements Serializable {
             url = "https://www.finnkino.fi/xml/Schedule/?area=" + id;
         }
 
+
         // TODO: check if this null checking is fine
         if(filterTimePeriodStart == null) {
-            filterTimePeriodStart = LocalTime.MIN;  //???
+            filterTimePeriodStart = LocalTime.MIDNIGHT;  //???
         }
         if(filterTimePeriodEnd == null) {
             filterTimePeriodEnd = LocalTime.MAX;    //???
@@ -79,7 +84,7 @@ public class Theater implements Serializable {
 
                     // Get the movies starting time to filter out movies that aren't in the specified time range
                     String movieStartTime = element.getElementsByTagName("dttmShowStart").item(0).getTextContent();
-                    LocalTime movieStartLocalTime = LocalTime.parse(movieStartTime.split("T")[0]);
+                    LocalTime movieStartLocalTime = LocalTime.parse(movieStartTime.split("T")[1]);
 
                     if(movieStartLocalTime.isAfter(filterTimePeriodStart) && movieStartLocalTime.isBefore(filterTimePeriodEnd)){
                         Movie movie = new Movie(element);

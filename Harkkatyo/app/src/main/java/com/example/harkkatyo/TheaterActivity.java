@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -107,4 +109,11 @@ public class TheaterActivity extends AppCompatActivity {
         timePickerDialog.setTitle("Select end time");
         timePickerDialog.show();
     }
+
+    public void movieChoice (View v) {
+        Intent intent = new Intent(TheaterActivity.this, MovieActivity.class);
+        intent.putExtra("movie", theater.getMovie(list.getSelectedItemPosition()));
+        startActivity(intent);
+    }
+
 }

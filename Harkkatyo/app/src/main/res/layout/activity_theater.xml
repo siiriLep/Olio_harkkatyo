@@ -44,6 +44,7 @@
         app:layout_constraintGuide_begin="115dp" />
 
     <ListView
+        android:id="@+id/list"
         android:layout_width="413dp"
         android:layout_height="570dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -57,11 +57,15 @@ public class TheaterManager  {
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
 
-                    // creating the actual object
-                    Theater theater = new Theater(element);
+                    // Checking whether the name of the theater has ":" in it
+                    if(element.getElementsByTagName("Name").item(0).getTextContent().matches(".*:.*")){
+                        // creating the actual object
+                        Theater theater = new Theater(element);
+                        // adding object to list of theaters
+                        theaters.add(theater);
+                    }
 
-                    // adding object to list of theaters
-                    theaters.add(theater);
+
 
                 }
             }

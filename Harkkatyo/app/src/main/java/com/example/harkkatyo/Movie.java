@@ -22,8 +22,12 @@ public class Movie implements Serializable {
     private int runtime;
 
     private String ImageUrl;
+    private String ratingImage;
     private String ogTitle;
     private String genre;
+    private String language;
+    private String presentationMethod;
+    private String theater;
 
 
 
@@ -35,10 +39,14 @@ public class Movie implements Serializable {
         this.id = Integer.parseInt(movieInfo.getElementsByTagName("ID").item(0).getTextContent());
         this.runtime = Integer.parseInt(movieInfo.getElementsByTagName("LengthInMinutes").item(0).getTextContent());
         this.ImageUrl = movieInfo.getElementsByTagName("Images").item(0).getTextContent();
-
+        this.ratingImage = movieInfo.getElementsByTagName("RatingImageUrl").item(0).getTextContent();
         this.ogTitle = movieInfo.getElementsByTagName("OriginalTitle").item(0).getTextContent();
         this.genre = movieInfo.getElementsByTagName("Genres").item(0).getTextContent();
+        this.language = movieInfo.getElementsByTagName("SpokenLanguage").item(0).getTextContent();
+        this.presentationMethod = movieInfo.getElementsByTagName("PresentationMethod").item(0).getTextContent();
+        this.theater = movieInfo.getElementsByTagName("Theatre").item(0).getTextContent();
         this.eventID = Integer.parseInt(movieInfo.getElementsByTagName("EventID").item(0).getTextContent());
+
     }
     
 
@@ -108,5 +116,21 @@ public class Movie implements Serializable {
 
     public int getEventID() {
         return eventID;
+    }
+
+    public String getRatingImage(){
+        return ratingImage;
+    }
+
+    public String getLanguage(){
+        return language;
+    }
+
+    public String getPresentationMethod() {
+        return presentationMethod;
+    }
+
+    public String getTheater() {
+        return theater;
     }
 }

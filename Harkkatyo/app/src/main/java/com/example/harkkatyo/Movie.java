@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import org.w3c.dom.Element;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /*
     ### Movie ###
@@ -18,8 +19,11 @@ public class Movie implements Serializable {
     private int id;
     private String title;
     private int runtime;
+
+    private String ImageUrl;
     private String ogTitle;
     private String genre;
+
 
 
 
@@ -29,9 +33,13 @@ public class Movie implements Serializable {
         this.title = movieInfo.getElementsByTagName("Title").item(0).getTextContent();
         this.id = Integer.parseInt(movieInfo.getElementsByTagName("ID").item(0).getTextContent());
         this.runtime = Integer.parseInt(movieInfo.getElementsByTagName("LengthInMinutes").item(0).getTextContent());
+        this.ImageUrl = movieInfo.getElementsByTagName("Images").item(0).getTextContent();
+
         this.ogTitle = movieInfo.getElementsByTagName("OriginalTitle").item(0).getTextContent();
         this.genre = movieInfo.getElementsByTagName("Genres").item(0).getTextContent();
+
     }
+    
 
 
 
@@ -47,11 +55,53 @@ public class Movie implements Serializable {
         return runtime;
     }
 
+    public String getLandscapeImageUrl() {
+        String[] urls = ImageUrl.split("\n");
+
+        for(String url : urls) {
+            if (url.matches(".*landscape_large.*")) {
+                return url.trim();
+            }
+        }
+        for(String url : urls) {
+            if (url.matches(".*landscape_large.*")) {
+                return url.trim();
+            }
+        }
+        for(String url : urls) {
+            if (url.matches(".*landscape_large.*")) {
+                return url.trim();
+            }
+        }
+
+        return null;
+    }
+
+    public String getPortraitImageUrl() {
+        String[] urls = ImageUrl.split("\n");
+        for(String url : urls) {
+            if (url.matches(".*portrait_large.*")) {
+                return url.trim();
+            }
+        }
+        for(String url : urls) {
+            if (url.matches(".*portrait_medium.*")) {
+                return url.trim();
+            }
+        }
+        for(String url : urls) {
+            if (url.matches(".*portrait_small.*")) {
+                return url.trim();
+            }
+        }
+        return null;
+
     public String getOgTitle() {
         return ogTitle;
     }
 
     public String getGenre() {
         return genre;
+
     }
 }

@@ -35,6 +35,8 @@ public class RatingManager {
         movieTitle = movie.getTitle();
     }
 
+    RatingManager() {}
+
     public void addRating(int stars, String text) throws IOException {
 
         rating = new Rating(eventId, movieTitle, stars, text);
@@ -63,23 +65,27 @@ public class RatingManager {
         return rating;
     }
 
-    public ArrayList<Rating> getAllRatings() throws IOException {
+    public ArrayList<Rating> getAllRatings() {
         ArrayList<Rating> allRatings = new ArrayList<>();
         ArrayList<String> fileNames = new ArrayList<>();
-        File[] files = new File("file:///android_assets/reviews/").listFiles();
+        try {
+            File[] files = new File("file:///android_assets/reviews/").listFiles();
 
-        assert files != null: "No ratings available";
-        for (File file : files) {
-            if(file.isFile()) {
-                fileNames.add(file.getName());
+            assert files != null: "No ratings available";
+            for (File file : files) {
+                if(file.isFile()) {
+                    fileNames.add(file.getName());
+                }
             }
-        }
 
-        for(String fileName : fileNames) {
-            Gson gson = new Gson();
-            String jsonString = new String(Files.readAllBytes(Paths.get("file:///android_asset/reviews/"+fileName)));
-            rating = gson.fromJson(jsonString, Rating.class);
-            allRatings.add(rating);
+            for(String fileName : fileNames) {
+                Gson gson = new Gson();
+                String jsonString = new String(Files.readAllBytes(Paths.get("file:///android_asset/reviews/"+fileName)));
+                rating = gson.fromJson(jsonString, Rating.class);
+                allRatings.add(rating);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return allRatings;

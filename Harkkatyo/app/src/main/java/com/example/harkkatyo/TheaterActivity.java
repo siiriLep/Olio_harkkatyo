@@ -82,8 +82,8 @@ public class TheaterActivity extends AppCompatActivity {
         updateMovieList(date, filterStart, filterEnd);
     }
 
-    private void updateMovieList(LocalDate date, LocalTime filterTimePeriodStart, LocalTime filterTimePerdiodEnd){
-        theater.fetchMovies(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), filterTimePeriodStart, filterTimePerdiodEnd);
+    private void updateMovieList(LocalDate date, LocalTime filterTimePeriodStart, LocalTime filterTimePeriodEnd){
+        theater.fetchMovies(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), filterTimePeriodStart, filterTimePeriodEnd);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, theater.getMovieNames());
         list.setAdapter(adapter);
         adapter.notifyDataSetChanged();

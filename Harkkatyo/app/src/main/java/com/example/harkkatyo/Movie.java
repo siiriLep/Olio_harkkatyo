@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class Movie implements Serializable {
     private int id;
+    private int eventID;
     private String title;
     private int runtime;
 
@@ -37,7 +38,7 @@ public class Movie implements Serializable {
 
         this.ogTitle = movieInfo.getElementsByTagName("OriginalTitle").item(0).getTextContent();
         this.genre = movieInfo.getElementsByTagName("Genres").item(0).getTextContent();
-
+        this.eventID = Integer.parseInt(movieInfo.getElementsByTagName("EventID").item(0).getTextContent());
     }
     
 
@@ -79,22 +80,23 @@ public class Movie implements Serializable {
 
     public String getPortraitImageUrl() {
         String[] urls = ImageUrl.split("\n");
-        for(String url : urls) {
+        for (String url : urls) {
             if (url.matches(".*portrait_large.*")) {
                 return url.trim();
             }
         }
-        for(String url : urls) {
+        for (String url : urls) {
             if (url.matches(".*portrait_medium.*")) {
                 return url.trim();
             }
         }
-        for(String url : urls) {
+        for (String url : urls) {
             if (url.matches(".*portrait_small.*")) {
                 return url.trim();
             }
         }
         return null;
+    }
 
     public String getOgTitle() {
         return ogTitle;
@@ -102,6 +104,9 @@ public class Movie implements Serializable {
 
     public String getGenre() {
         return genre;
+    }
 
+    public int getEventID() {
+        return eventID;
     }
 }

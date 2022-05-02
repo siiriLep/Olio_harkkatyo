@@ -1,21 +1,32 @@
 package com.example.harkkatyo;
 
-
-/*
-    ### RATING ###
-    * ratings from IMDB
-    * ability to add own rating and comment
-
-
- */
-
 public class Rating {
-    private String movieName;
 
-    Rating(String movieName){
-        this.movieName = movieName;
+    private int stars;
+    private String comment;
+    private int id;
+    private String title;
+
+    Rating(int id, String title, int stars, String text){
+        this.stars = stars;
+        this.comment = text;
+        this.id = id;
+        this.title = title;
     }
 
+    public int getStars() {
+        return stars;
+    }
 
+    public String getComment() {
+        return comment;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }

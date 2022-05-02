@@ -43,4 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void loadRatingsView(View v) {
+        Intent intent = new Intent(MainActivity.this, AllRatingsActivity.class);
+        startActivity(intent);
+    }
+
 }

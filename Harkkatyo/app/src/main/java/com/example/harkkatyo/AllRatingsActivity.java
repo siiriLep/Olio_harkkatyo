@@ -33,7 +33,10 @@ public class AllRatingsActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,parsedRatings);
         if (parsedRatings.isEmpty()) {
             noRatings.setText("Ei vielä arvosteluja!\nJätä arvostelu jollekkin elokuvalle niin ne näkyvät täällä");
+        } else {
+            list.setAdapter(adapter);
         }
+
 
     }
 }

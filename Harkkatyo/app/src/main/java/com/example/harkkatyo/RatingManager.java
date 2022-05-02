@@ -41,16 +41,18 @@ public class RatingManager {
 
     RatingManager() {}
 
-    public void addRating(int stars, String text) throws IOException {
+    public void addRating(int stars, String text) {
 
         rating = new Rating(movie, eventId, movieTitle, stars, text);
         Gson gson = new Gson();
         String json = gson.toJson(rating);
-
-        FileWriter fw = new FileWriter("file:///android_asset/reviews/"+eventId+".json");
-        fw.write(String.valueOf(json));
-        fw.close();
-
+        try {
+            FileWriter fw = new FileWriter("file:///android_asset/reviews/" + eventId + ".json");
+            fw.write(String.valueOf(json));
+            fw.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
 
     }

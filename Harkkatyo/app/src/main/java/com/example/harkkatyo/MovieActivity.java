@@ -2,14 +2,14 @@ package com.example.harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 public class MovieActivity extends AppCompatActivity {
 
@@ -20,7 +20,8 @@ public class MovieActivity extends AppCompatActivity {
     TextView language;
     TextView runtime;
     TextView presentationMethod;
-    TextView theater;
+    TextView theaterName;
+    Button button;
 
     ImageView image;
     ImageView ratingImage;
@@ -39,10 +40,11 @@ public class MovieActivity extends AppCompatActivity {
         language = (TextView) findViewById(R.id.textView9);
         runtime = (TextView) findViewById(R.id.length);
         presentationMethod = (TextView) findViewById(R.id.textView7);
-        theater = (TextView) findViewById(R.id.theaters);
+        theaterName = (TextView) findViewById(R.id.theaters);
+        button = (Button) findViewById(R.id.button2);
 
 
-        theater.setText(movie.getTheater());
+        theaterName.setText(movie.getTheater());
         presentationMethod.setText(" "+movie.getPresentationMethod()+ " ");
         runtime.setText(String.valueOf(movie.getRuntime()) + "min"); // not entirely sure if valueOf is needed me tired u_u
         movieTitle.setText(movie.getTitle());
@@ -58,6 +60,13 @@ public class MovieActivity extends AppCompatActivity {
 
 
 
+    //vie elokuva olio
+
+    public void loadAddRating (View view) {
+        Intent intent = new Intent(MovieActivity.this, AddRating.class);
+        startActivity(intent);
+
+    }
 
 
 }

@@ -28,18 +28,22 @@ import java.util.Scanner;
 public class RatingManager {
     private int eventId;
     private String movieTitle;
+    private Movie movie;
+
     Rating rating;
 
     RatingManager(Movie movie){
+        this.movie = movie;
         this.eventId = movie.getEventID();
         movieTitle = movie.getTitle();
+
     }
 
     RatingManager() {}
 
     public void addRating(int stars, String text) throws IOException {
 
-        rating = new Rating(eventId, movieTitle, stars, text);
+        rating = new Rating(movie, eventId, movieTitle, stars, text);
         Gson gson = new Gson();
         String json = gson.toJson(rating);
 

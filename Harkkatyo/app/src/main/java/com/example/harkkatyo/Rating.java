@@ -6,8 +6,9 @@ public class Rating {
     private String comment;
     private int id;
     private String title;
+    private Movie movie;
 
-    Rating(int id, String title, int stars, String text){
+    Rating(Movie movie ,int id, String title, int stars, String text){
         this.stars = stars;
         this.comment = text;
         this.id = id;
@@ -28,5 +29,9 @@ public class Rating {
 
     public String getTitle() {
         return title;
+    }
+
+    public Movie getMovie() {
+        return movie;
     }
 }

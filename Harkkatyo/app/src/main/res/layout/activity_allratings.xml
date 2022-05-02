@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/grey_bg"
     android:layout_height="match_parent">
 
     <TextView
@@ -31,6 +32,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Kaikki arvostelusi"
+        android:textColor="#E6E6E6"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

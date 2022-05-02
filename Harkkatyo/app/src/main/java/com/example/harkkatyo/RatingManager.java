@@ -71,18 +71,20 @@ public class RatingManager {
         try {
             File[] files = new File("file:///android_assets/reviews/").listFiles();
 
-            assert files != null: "No ratings available";
-            for (File file : files) {
-                if(file.isFile()) {
-                    fileNames.add(file.getName());
-                }
-            }
+            if (files != null) {
 
-            for(String fileName : fileNames) {
-                Gson gson = new Gson();
-                String jsonString = new String(Files.readAllBytes(Paths.get("file:///android_asset/reviews/"+fileName)));
-                rating = gson.fromJson(jsonString, Rating.class);
-                allRatings.add(rating);
+                 for (File file : files) {
+                     if(file.isFile()) {
+                         fileNames.add(file.getName());
+                     }
+                 }
+
+                 for(String fileName : fileNames) {
+                     Gson gson = new Gson();
+                     String jsonString = new String(Files.readAllBytes(Paths.get("file:///android_asset/reviews/"+fileName)));
+                     rating = gson.fromJson(jsonString, Rating.class);
+                     allRatings.add(rating);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

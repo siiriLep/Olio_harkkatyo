@@ -17,6 +17,7 @@ import java.util.ArrayList;
  */
 public class Movie implements Serializable {
     private int id;
+    private int eventID;
     private String title;
     private int runtime;
 
@@ -44,6 +45,8 @@ public class Movie implements Serializable {
         this.language = movieInfo.getElementsByTagName("SpokenLanguage").item(0).getTextContent();
         this.presentationMethod = movieInfo.getElementsByTagName("PresentationMethod").item(0).getTextContent();
         this.theater = movieInfo.getElementsByTagName("Theatre").item(0).getTextContent();
+        this.eventID = Integer.parseInt(movieInfo.getElementsByTagName("EventID").item(0).getTextContent());
+
     }
     
 
@@ -109,7 +112,10 @@ public class Movie implements Serializable {
 
     public String getGenre() {
         return genre;
+    }
 
+    public int getEventID() {
+        return eventID;
     }
 
     public String getRatingImage(){

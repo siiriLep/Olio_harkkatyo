@@ -13,15 +13,21 @@
         android:theme="@style/Theme.Harkkatyo"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ViewRating"
+            android:exported="false" />
+        <activity
             android:name=".MovieActivity"
             android:exported="false" />
         <activity
             android:name=".TheaterActivity"
             android:exported="false" />
         <activity
+            android:name=".AllRatingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateVisible|adjustNothing">
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,9 +4,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -14,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -29,12 +32,13 @@ public class TheaterActivity extends AppCompatActivity {
     TextView currentDateText;
     LocalTime filterStart, filterEnd;
     Button timePickerStart, timePickerEnd;
+    int selectedIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theater);
-
+        selectedIndex = 0;
 
         theater = (Theater) getIntent().getSerializableExtra("object");
         list = findViewById(R.id.list);
@@ -48,6 +52,15 @@ public class TheaterActivity extends AppCompatActivity {
 
         updateMovieList(date, filterStart, filterEnd);
         updateDate(date);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedIndex = i;
+                movieChoice();
+            }
+        });
+
     }
 
 
@@ -107,4 +120,12 @@ public class TheaterActivity extends AppCompatActivity {
         timePickerDialog.setTitle("Select end time");
         timePickerDialog.show();
     }
+
+    // TODO: maybe rename this function to something more descriptive
+    public void movieChoice () {
+        Intent intent = new Intent(TheaterActivity.this, MovieActivity.class);
+        intent.putExtra("movie", theater.getMovie(selectedIndex));
+        startActivity(intent);
+    }
+
 }

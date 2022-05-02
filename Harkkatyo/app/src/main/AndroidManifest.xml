@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Harkkatyo"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MovieActivity"
+            android:exported="false" />
+        <activity
             android:name=".TheaterActivity"
             android:exported="false" />
         <activity

@@ -45,11 +45,9 @@ public class RatingManager {
 
         rating = new Rating(movie, eventId, movieTitle, stars, text);
         Gson gson = new Gson();
-        String json = gson.toJson(rating);
+        String filePath = "file:///android_asset/reviews/" + eventId + ".json";
         try {
-            FileWriter fw = new FileWriter("file:///android_asset/reviews/" + eventId + ".json");
-            fw.write(String.valueOf(json));
-            fw.close();
+            gson.toJson(rating, new FileWriter(filePath));
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -60,7 +58,7 @@ public class RatingManager {
     public Rating getRating() {
         Gson gson = new Gson();
         try{
-            String jsonString = new String(Files.readAllBytes(Paths.get("file:///android_asset/reviews/"+eventId+".json")));
+            String jsonString = new String(Files.readAllBytes(Paths.get("file:///android_asset/reviews/"+eventId+".json")));  // TODO KORJAA TÄMÄ MUUALLE KUIN ASSETSIIN ASSETS READ ONLY
             rating = gson.fromJson(jsonString, Rating.class);
 
         } catch (IOException e) {

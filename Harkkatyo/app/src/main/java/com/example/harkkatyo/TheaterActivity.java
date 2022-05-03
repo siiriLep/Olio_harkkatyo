@@ -3,8 +3,11 @@ package com.example.harkkatyo;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -77,7 +80,20 @@ public class TheaterActivity extends AppCompatActivity {
 
     private void updateMovieList(LocalDate date, LocalTime filterTimePeriodStart, LocalTime filterTimePeriodEnd){
         theater.fetchMovies(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), filterTimePeriodStart, filterTimePeriodEnd);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, theater.getMovieNames());
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, theater.getMovieNames()){
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view =super.getView(position, convertView, parent);
+
+                TextView textView=(TextView) view.findViewById(android.R.id.text1);
+
+                /*YOUR CHOICE OF COLOR*/
+                textView.setTextColor(Color.WHITE);
+
+                return view;
+            }
+        };
         list.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

@@ -1,6 +1,9 @@
 package com.example.harkkatyo;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,7 +33,23 @@ public class AllRatingsActivity extends AppCompatActivity {
             String parsed = rating.getStars() + "/5\t" + rating.getTitle();
             parsedRatings.add(parsed);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,parsedRatings);
+
+        ArrayAdapter<String> adapter=new ArrayAdapter<String>(
+                this, android.R.layout.simple_list_item_1, parsedRatings){
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view =super.getView(position, convertView, parent);
+
+                TextView textView=(TextView) view.findViewById(android.R.id.text1);
+
+                /*YOUR CHOICE OF COLOR*/
+                textView.setTextColor(Color.WHITE);
+
+                return view;
+            }
+        };
+
         System.out.println(ratings.size());
         if (parsedRatings.size() < 1) {
             //noRatings.setText("Ei vielä arvosteluja!\nJätä arvostelu jollekkin elokuvalle niin ne näkyvät täällä");

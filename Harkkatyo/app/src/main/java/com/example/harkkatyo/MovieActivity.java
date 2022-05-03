@@ -21,6 +21,8 @@ public class MovieActivity extends AppCompatActivity {
     TextView runtime;
     TextView presentationMethod;
     TextView theaterName;
+    TextView MovieStart;
+    TextView MovieEnd;
     Button button;
 
     ImageView image;
@@ -34,7 +36,7 @@ public class MovieActivity extends AppCompatActivity {
         movie = (Movie) getIntent().getSerializableExtra("movie");
         movieTitle = (TextView) findViewById(R.id.movieTitle);
         image = (ImageView) findViewById(R.id.imageView);
-        originalTitle = (TextView) findViewById(R.id.OGtitle);
+        originalTitle = (TextView) findViewById(R.id.OGtitle2);
         genres = (TextView) findViewById(R.id.genres);
         ratingImage = (ImageView) findViewById(R.id.ageRating);
         language = (TextView) findViewById(R.id.textView9);
@@ -42,6 +44,8 @@ public class MovieActivity extends AppCompatActivity {
         presentationMethod = (TextView) findViewById(R.id.textView7);
         theaterName = (TextView) findViewById(R.id.theaters);
         button = (Button) findViewById(R.id.button2);
+        MovieStart = (TextView) findViewById(R.id.startTime);
+        MovieEnd = (TextView) findViewById(R.id.endTime);
 
 
         theaterName.setText(movie.getTheater());
@@ -54,6 +58,8 @@ public class MovieActivity extends AppCompatActivity {
         System.out.println(movie.getLandscapeImageUrl());
         Picasso.get().load(movie.getLandscapeImageUrl()).into(image);
         Picasso.get().load(movie.getRatingImage()).into(ratingImage);
+        MovieStart.setText(movie.getStartOfMovie()+" - ");
+        MovieEnd.setText(movie.getEndOfMovie());
 
 
     }

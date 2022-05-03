@@ -29,8 +29,9 @@ public class AddRating extends AppCompatActivity {
     }
 
     public void submitRating(View v){
-        rm.addRating(ratingBar.getNumStars(), comment.getText().toString(), AddRating.this );
+        rm.addRating((int) ratingBar.getRating(), comment.getText().toString(), AddRating.this );
         super.finish();
+        super.onBackPressed();
     }
 
 

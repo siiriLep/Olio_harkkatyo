@@ -16,6 +16,7 @@ public class ViewRatingActivity extends AppCompatActivity {
     ImageView image;
     RatingBar ratingBar;
     TextView comment;
+    TextView movieTitle;
 
 
     @Override
@@ -30,9 +31,11 @@ public class ViewRatingActivity extends AppCompatActivity {
         image = findViewById(R.id.movieImage_rating);
         ratingBar = findViewById(R.id.ratingBar_view);
         comment = findViewById(R.id.comment_rating);
+        movieTitle = findViewById(R.id.movieName_rating);
 
         comment.setText(rating.getComment());
         ratingBar.setRating(rating.getStars());
         Picasso.get().load(movie.getLandscapeImageUrl()).into(image);
+        movieTitle.setText(movie.getTitle());
     }
 }

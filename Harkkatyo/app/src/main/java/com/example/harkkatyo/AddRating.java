@@ -3,6 +3,7 @@ package com.example.harkkatyo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -29,7 +30,7 @@ public class AddRating extends AppCompatActivity {
 
     public void submitRating(View v){
         rm.addRating(ratingBar.getNumStars(), comment.getText().toString(), AddRating.this );
-
+        super.finish();
     }
 
 

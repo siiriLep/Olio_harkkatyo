@@ -7,7 +7,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;

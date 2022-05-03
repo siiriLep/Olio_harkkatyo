@@ -1,14 +1,11 @@
 package com.example.harkkatyo;
 
-
-import android.content.Context;
-
 import androidx.annotation.NonNull;
 
 import org.w3c.dom.Element;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 /*
     ### Movie ###

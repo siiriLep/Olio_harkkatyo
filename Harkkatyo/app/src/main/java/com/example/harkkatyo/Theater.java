@@ -1,10 +1,8 @@
 package com.example.harkkatyo;
 
 
-import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -16,9 +14,9 @@ import java.io.IOException;
 
 import java.io.Serializable;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
-import java.util.Locale;
+
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

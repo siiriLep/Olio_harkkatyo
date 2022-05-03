@@ -21,7 +21,7 @@ public class AllRatingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_allratings);
 
         RatingManager rm = new RatingManager();
-        ArrayList<Rating> ratings = rm.getAllRatings();
+        ArrayList<Rating> ratings = rm.getAllRatings(AllRatingsActivity.this);
         list = (ListView) findViewById(R.id.listView);
         noRatings = (TextView) findViewById(R.id.noRatings);
 
@@ -31,8 +31,9 @@ public class AllRatingsActivity extends AppCompatActivity {
             parsedRatings.add(parsed);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,parsedRatings);
-        if (parsedRatings.isEmpty()) {
-            noRatings.setText("Ei vielä arvosteluja!\nJätä arvostelu jollekkin elokuvalle niin ne näkyvät täällä");
+        System.out.println(ratings.size());
+        if (parsedRatings.size() < 1) {
+            //noRatings.setText("Ei vielä arvosteluja!\nJätä arvostelu jollekkin elokuvalle niin ne näkyvät täällä");
         } else {
             list.setAdapter(adapter);
         }

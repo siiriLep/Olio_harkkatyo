@@ -1,6 +1,8 @@
 package com.example.harkkatyo;
 
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import org.w3c.dom.Element;
@@ -30,8 +32,6 @@ public class Movie implements Serializable {
     private String theater;
     private String startOfMovie;
     private String endOfMovie;
-
-
 
 
 

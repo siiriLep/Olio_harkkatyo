@@ -2,6 +2,7 @@ package com.example.harkkatyo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class MovieActivity extends AppCompatActivity {
 
@@ -66,10 +70,18 @@ public class MovieActivity extends AppCompatActivity {
 
 
 
-    //vie elokuva olio
-
     public void loadAddRating (View view) {
-        Intent intent = new Intent(MovieActivity.this, AddRating.class);
+        Intent intent;
+        Context context = MovieActivity.this;
+        // If a review exists for this movie, show it. Else create a new rating
+        if(Files.exists(Paths.get(String.valueOf(Paths.get(context.getFilesDir().toString() + "/" + movie.getEventID() + ".json"))))) {
+            intent = new Intent(MovieActivity.this, ViewRatingActivity.class);
+        } else {
+            intent = new Intent(MovieActivity.this, AddRating.class);
+        }
+
+        intent.putExtra("movie", movie);
+
         startActivity(intent);
 
     }

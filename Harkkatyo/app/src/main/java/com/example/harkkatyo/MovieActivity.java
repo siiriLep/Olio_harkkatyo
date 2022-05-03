@@ -40,7 +40,7 @@ public class MovieActivity extends AppCompatActivity {
         movie = (Movie) getIntent().getSerializableExtra("movie");
         movieTitle = (TextView) findViewById(R.id.movieTitle);
         image = (ImageView) findViewById(R.id.imageView);
-        originalTitle = (TextView) findViewById(R.id.OGtitle2);
+        originalTitle = (TextView) findViewById(R.id.OGtitle);
         genres = (TextView) findViewById(R.id.genres);
         ratingImage = (ImageView) findViewById(R.id.ageRating);
         language = (TextView) findViewById(R.id.textView9);

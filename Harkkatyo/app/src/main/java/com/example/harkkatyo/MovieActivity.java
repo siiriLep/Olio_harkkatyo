@@ -70,7 +70,7 @@ public class MovieActivity extends AppCompatActivity {
         Intent intent;
         Context context = MovieActivity.this;
         // If a review exists for this movie, show it. Else create a new rating
-        if(Files.exists(Paths.get(String.valueOf(Paths.get(context.getFilesDir().toString() + "/" + movie.getEventID() + ".json"))))) {
+        if(Files.exists(Paths.get(context.getFilesDir().toString() + "/" + movie.getEventID() + ".json"))) {
             intent = new Intent(MovieActivity.this, ViewRatingActivity.class);
         } else {
             intent = new Intent(MovieActivity.this, AddRating.class);

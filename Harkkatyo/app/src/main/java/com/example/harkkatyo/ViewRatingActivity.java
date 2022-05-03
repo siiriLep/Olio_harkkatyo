@@ -38,7 +38,7 @@ public class ViewRatingActivity extends AppCompatActivity {
 
         comment.setText(rating.getComment());
         ratingBar.setRating(rating.getStars());
-        Picasso.get().load(rating.getMovie().getLandscapeImageUrl()).into(image);
-        movieTitle.setText(rating.getTitle());
+        Picasso.get().load(movie.getLandscapeImageUrl()).into(image);
+        movieTitle.setText(movie.getTitle());
     }
 }

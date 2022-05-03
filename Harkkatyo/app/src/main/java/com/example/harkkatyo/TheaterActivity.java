@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,11 +97,16 @@ public class TheaterActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+
+    // Android default time picker dialog
     public void openStartTimePicker(View V){
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                // check to see if the picked time is before the filters end time
                 if(LocalTime.parse(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute)).isBefore(filterEnd)) {
+
+                    // parsing string into localTime object for easier comparisons
                     filterStart = LocalTime.parse(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute));
                     timePickerStart.setText(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute));
                     updateMovieList(date, filterStart, filterEnd);
@@ -118,7 +122,9 @@ public class TheaterActivity extends AppCompatActivity {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                // check to see if the picked time is after the filters start time
                 if(LocalTime.parse(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute)).isAfter(filterStart)) {
+                    // parsing string into localTime object for easier comparisons
                     filterEnd = LocalTime.parse(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute));
                     timePickerEnd.setText(String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute));
                     updateMovieList(date, filterStart, filterEnd);
@@ -130,7 +136,8 @@ public class TheaterActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    // TODO: maybe rename this function to something more descriptive
+
+    // when movie is picked load the movie scene
     public void movieChoice () {
         Intent intent = new Intent(TheaterActivity.this, MovieActivity.class);
         intent.putExtra("movie", theater.getMovie(selectedIndex));

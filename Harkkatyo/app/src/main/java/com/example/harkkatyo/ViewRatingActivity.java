@@ -26,8 +26,11 @@ public class ViewRatingActivity extends AppCompatActivity {
 
         movie = (Movie) getIntent().getSerializableExtra("movie");
         RatingManager rm = new RatingManager(movie);
+
+        // get the rating from rating manager
         rating = rm.getRating(ViewRatingActivity.this);
 
+        // setting texts and images via id
         image = findViewById(R.id.movieImage_rating);
         ratingBar = findViewById(R.id.ratingBar_view);
         comment = findViewById(R.id.comment_rating);
@@ -35,7 +38,7 @@ public class ViewRatingActivity extends AppCompatActivity {
 
         comment.setText(rating.getComment());
         ratingBar.setRating(rating.getStars());
-        Picasso.get().load(movie.getLandscapeImageUrl()).into(image);
-        movieTitle.setText(movie.getTitle());
+        Picasso.get().load(rating.getMovie().getLandscapeImageUrl()).into(image);
+        movieTitle.setText(rating.getTitle());
     }
 }

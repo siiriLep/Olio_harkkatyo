@@ -22,6 +22,7 @@ public class AddRating extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_rating);
 
+        // Get movie element from intent
         movie = (Movie) getIntent().getSerializableExtra("movie");
         rm = new RatingManager(movie);
         ratingBar = findViewById(R.id.ratingBar);
@@ -30,6 +31,8 @@ public class AddRating extends AppCompatActivity {
 
     public void submitRating(View v){
         rm.addRating((int) ratingBar.getRating(), comment.getText().toString(), AddRating.this );
+
+        // these two lines are just to get the user back to the last view after submitting a rating
         super.finish();
         super.onBackPressed();
     }

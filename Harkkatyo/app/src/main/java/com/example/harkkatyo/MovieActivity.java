@@ -37,6 +37,7 @@ public class MovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
 
+        //Bunch of UI elements saved to variables by ID
         movie = (Movie) getIntent().getSerializableExtra("movie");
         movieTitle = (TextView) findViewById(R.id.movieTitle);
         image = (ImageView) findViewById(R.id.imageView);
@@ -51,10 +52,9 @@ public class MovieActivity extends AppCompatActivity {
         MovieStart = (TextView) findViewById(R.id.startTime);
         MovieEnd = (TextView) findViewById(R.id.endTime);
 
-
         theaterName.setText(movie.getTheater());
         presentationMethod.setText(" "+movie.getPresentationMethod()+ " ");
-        runtime.setText(String.valueOf(movie.getRuntime()) + "min"); // not entirely sure if valueOf is needed me tired u_u
+        runtime.setText(String.valueOf(movie.getRuntime()) + "min");
         movieTitle.setText(movie.getTitle());
         originalTitle.setText(movie.getOgTitle());
         genres.setText(movie.getGenre());
@@ -64,11 +64,7 @@ public class MovieActivity extends AppCompatActivity {
         Picasso.get().load(movie.getRatingImage()).into(ratingImage);
         MovieStart.setText(movie.getStartOfMovie()+" - ");
         MovieEnd.setText(movie.getEndOfMovie());
-
-
     }
-
-
 
     public void loadAddRating (View view) {
         Intent intent;

@@ -13,15 +13,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-/*
-   ### Manages all the theaters ###
-   * Gets all theaters
-   * Created with singleton model
 
-   * Get all movies
-   * Search movies
-
-*/
 public class TheaterManager  {
 
     //General variables for this class

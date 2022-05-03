@@ -7,13 +7,6 @@ import org.w3c.dom.Element;
 import java.io.Serializable;
 
 
-/*
-    ### Movie ###
-    * run time
-    * restrictions
-    * thumbnail image
-    * etc. etc.
- */
 public class Movie implements Serializable {
     private int id;
     private int eventID;
@@ -65,6 +58,7 @@ public class Movie implements Serializable {
         return runtime;
     }
 
+    // gets the largest possible resolution image and returns it
     public String getLandscapeImageUrl() {
         String[] urls = ImageUrl.split("\n");
 
@@ -83,29 +77,11 @@ public class Movie implements Serializable {
                 return url.trim();
             }
         }
-
+        // if no images are found return null
         return null;
     }
 
-    public String getPortraitImageUrl() {
-        String[] urls = ImageUrl.split("\n");
-        for (String url : urls) {
-            if (url.matches(".*portrait_large.*")) {
-                return url.trim();
-            }
-        }
-        for (String url : urls) {
-            if (url.matches(".*portrait_medium.*")) {
-                return url.trim();
-            }
-        }
-        for (String url : urls) {
-            if (url.matches(".*portrait_small.*")) {
-                return url.trim();
-            }
-        }
-        return null;
-    }
+    // Getter methods
 
     public String getOgTitle() {
         return ogTitle;

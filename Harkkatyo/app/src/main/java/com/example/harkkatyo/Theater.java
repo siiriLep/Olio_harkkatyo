@@ -22,14 +22,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-/*
-    ### Theater ###
-    * Theater name and ID
-    * all the movies the theater shows
-    * Theater info (whatever it is)
-    *
-
-*/
 
 public class Theater implements Serializable {
     private int id;
@@ -59,13 +51,12 @@ public class Theater implements Serializable {
             url = "https://www.finnkino.fi/xml/Schedule/?area=" + id;
         }
 
-
-        // TODO: check if this null checking is fine
+        // if filter times are left null, put them to the start and end of day AKA show the whole day
         if(filterTimePeriodStart == null) {
-            filterTimePeriodStart = LocalTime.MIDNIGHT;  //???
+            filterTimePeriodStart = LocalTime.MIDNIGHT;
         }
         if(filterTimePeriodEnd == null) {
-            filterTimePeriodEnd = LocalTime.MAX;    //???
+            filterTimePeriodEnd = LocalTime.MAX;
         }
 
         try { // reading the xml
@@ -74,6 +65,7 @@ public class Theater implements Serializable {
             doc.getDocumentElement().normalize();
             NodeList nodes = doc.getDocumentElement().getElementsByTagName("Show");
 
+            // loop through the nodes
             for (int i = 0; i < nodes.getLength(); i++) {
                 Node node = nodes.item(i);
                 if(node.getNodeType() == Node.ELEMENT_NODE){
@@ -83,6 +75,7 @@ public class Theater implements Serializable {
                     String movieStartTime = element.getElementsByTagName("dttmShowStart").item(0).getTextContent();
                     LocalTime movieStartLocalTime = LocalTime.parse(movieStartTime.split("T")[1]);
 
+                    // check wether the starting time of the movie is between the filters
                     if(movieStartLocalTime.isAfter(filterTimePeriodStart) && movieStartLocalTime.isBefore(filterTimePeriodEnd)){
                         Movie movie = new Movie(element);
                         movies.add(movie);

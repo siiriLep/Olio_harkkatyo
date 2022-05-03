@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
     }
-
+    // load theater activity with the selected theater
     public void loadActivity (View v) {
         Intent intent = new Intent(MainActivity.this, TheaterActivity.class);
         intent.putExtra("object", manager.getTheater(spinner.getSelectedItemPosition()));

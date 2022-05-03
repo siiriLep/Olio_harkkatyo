@@ -30,6 +30,9 @@ public class Movie implements Serializable {
     private String language;
     private String presentationMethod;
     private String theater;
+    private String startOfMovie;
+    private String endOfMovie;
+
 
 
     // Constructor is given the whole element from the xml, and it parses itself
@@ -46,7 +49,8 @@ public class Movie implements Serializable {
         this.presentationMethod = movieInfo.getElementsByTagName("PresentationMethod").item(0).getTextContent();
         this.theater = movieInfo.getElementsByTagName("Theatre").item(0).getTextContent();
         this.eventID = Integer.parseInt(movieInfo.getElementsByTagName("EventID").item(0).getTextContent());
-
+        this.startOfMovie = movieInfo.getElementsByTagName("dttmShowStart").item(0).getTextContent();
+        this.endOfMovie = movieInfo.getElementsByTagName("dttmShowEnd").item(0).getTextContent();
     }
     
 
@@ -132,5 +136,17 @@ public class Movie implements Serializable {
 
     public String getTheater() {
         return theater;
+    }
+
+    public String getStartOfMovie() {
+        startOfMovie = startOfMovie.split("T")[1];
+        startOfMovie = startOfMovie.substring(0,5);
+        return startOfMovie;
+    }
+
+    public String getEndOfMovie() {
+        endOfMovie = endOfMovie.split("T")[1];
+        endOfMovie = endOfMovie.substring(0,5);
+        return endOfMovie;
     }
 }

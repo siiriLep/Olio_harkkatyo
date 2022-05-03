@@ -1,6 +1,8 @@
 package com.example.harkkatyo;
 
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import org.w3c.dom.Element;
@@ -28,8 +30,6 @@ public class Movie implements Serializable {
     private String language;
     private String presentationMethod;
     private String theater;
-
-
 
 
     // Constructor is given the whole element from the xml, and it parses itself

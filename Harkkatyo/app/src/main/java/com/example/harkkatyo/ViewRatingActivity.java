@@ -25,7 +25,7 @@ public class ViewRatingActivity extends AppCompatActivity {
 
         movie = (Movie) getIntent().getSerializableExtra("movie");
         RatingManager rm = new RatingManager(movie);
-        rating = rm.getRating();
+        rating = rm.getRating(ViewRatingActivity.this);
 
         image = findViewById(R.id.movieImage_rating);
         ratingBar = findViewById(R.id.ratingBar_view);
